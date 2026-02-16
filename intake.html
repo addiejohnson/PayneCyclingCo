@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlete Evaluation Form // PCPC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+            --stone-950:#120014;--stone-900:#2E294E;--stone-800:#4B4E6D;--stone-700:#3F7CAC;
+            --stone-600:#95C6E8;--stone-500:#2E294E;--stone-400:#f8d7ed;--stone-300:#F25F8B;
+            --stone-200:#D88ACB;--stone-100:#F4F7FB;--stone-50:#FFFFFF;
+            --amber-500:#F25F8B;--amber-400:#fcc2f3;--amber-300:#cae7fc;
+            --emerald-500:#3F7CAC;
+            --font-sans:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+            --font-display:'Hanken Grotesk',sans-serif;
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:var(--font-sans);background:var(--stone-100);color:var(--stone-800);line-height:1.6;-webkit-font-smoothing:antialiased}
+        a{color:inherit;text-decoration:none}
+
+        /* NAV */
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,0,20,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06)}
+        .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:72px}
+        .nav-logo{display:flex;align-items:center}
+        .nav-logo img{height:40px;width:auto}
+        .nav-back{color:var(--stone-100);font-size:.875rem;font-weight:500;display:flex;align-items:center;gap:.5rem;transition:all .15s ease;cursor:pointer}
+        .nav-back:hover{color:var(--amber-400);transform:translateX(-2px)}
+        .nav-back:active{transform:translateX(0);transition:all .05s ease}
+        .nav-back svg{width:18px;height:18px}
+
+        /* FORM LAYOUT */
+        .form-page{max-width:800px;margin:0 auto;padding:7rem 2rem 4rem}
+        .form-header{margin-bottom:3rem}
+        .form-header h1{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);font-weight:700;color:var(--stone-900);margin-bottom:.75rem}
+        .form-header p{font-size:1rem;color:var(--stone-800);max-width:600px;line-height:1.7}
+        .form-header .privacy{font-size:.8rem;color:var(--stone-800);opacity:.7;margin-top:.5rem;font-style:italic}
+
+        /* SECTIONS */
+        .form-section{background:#fff;border:1px solid rgba(216,138,203,.15);border-radius:16px;padding:2rem 2.5rem;margin-bottom:1.5rem}
+        .form-section-title{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--stone-900);margin-bottom:.25rem}
+        .form-section-desc{font-size:.85rem;color:var(--stone-800);margin-bottom:1.5rem;opacity:.7}
+        .form-section-divider{height:1px;background:var(--stone-100);margin:1.5rem 0}
+
+        /* FORM ELEMENTS */
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+        .form-row.single{grid-template-columns:1fr}
+        .form-row.triple{grid-template-columns:1fr 1fr 1fr}
+        .form-group{display:flex;flex-direction:column;gap:.35rem}
+        .form-group label{font-size:.8rem;font-weight:600;color:var(--stone-900);letter-spacing:.02em}
+        .form-group label .optional{font-weight:400;color:var(--stone-800);opacity:.5}
+        .form-group input,.form-group select,.form-group textarea{
+            font-family:var(--font-sans);font-size:.9rem;padding:.7rem 1rem;
+            border:1px solid rgba(216,138,203,.25);border-radius:8px;
+            background:var(--stone-100);color:var(--stone-900);
+            transition:border-color .2s,box-shadow .2s;outline:none;
+        }
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+            border-color:var(--amber-500);box-shadow:0 0 0 3px rgba(242,95,139,.1)
+        }
+        .form-group textarea{resize:vertical;min-height:80px}
+        .form-group input::placeholder,.form-group textarea::placeholder{color:var(--stone-800);opacity:.4}
+        .form-group select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234B4E6D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+
+        /* CHECKBOX / RADIO GROUPS */
+        .check-group{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.25rem}
+        .check-item{display:flex;align-items:center;gap:.5rem;cursor:pointer}
+        .check-item input[type="checkbox"],.check-item input[type="radio"]{
+            width:18px;height:18px;accent-color:var(--amber-500);cursor:pointer
+        }
+        .check-item label{font-size:.85rem;color:var(--stone-900);cursor:pointer}
+
+        /* RATING GRID */
+        .rating-grid{display:grid;grid-template-columns:1fr auto;gap:.5rem 1rem;align-items:center;margin-top:.5rem}
+        .rating-label{font-size:.85rem;color:var(--stone-900)}
+        .rating-input{width:60px;text-align:center;font-size:.85rem;padding:.4rem;border:1px solid rgba(216,138,203,.25);border-radius:6px;background:var(--stone-100);color:var(--stone-900);outline:none}
+        .rating-input:focus{border-color:var(--amber-500);box-shadow:0 0 0 3px rgba(242,95,139,.1)}
+        .rating-note{font-size:.75rem;color:var(--stone-800);opacity:.5;margin-bottom:.75rem}
+
+        /* AVAILABILITY */
+        .avail-grid{display:grid;grid-template-columns:100px 1fr;gap:.5rem;align-items:center}
+        .avail-day{font-size:.85rem;font-weight:600;color:var(--stone-900)}
+        .avail-input{font-family:var(--font-sans);font-size:.85rem;padding:.5rem .75rem;border:1px solid rgba(216,138,203,.25);border-radius:6px;background:var(--stone-100);color:var(--stone-900);outline:none}
+        .avail-input:focus{border-color:var(--amber-500);box-shadow:0 0 0 3px rgba(242,95,139,.1)}
+
+        /* SUBMIT */
+        .form-submit{text-align:center;padding:2rem 0}
+        .btn-submit{display:inline-flex;align-items:center;gap:.5rem;background:var(--amber-500);color:var(--stone-950);padding:1.1rem 3rem;border-radius:8px;font-weight:700;font-size:1.05rem;border:none;cursor:pointer;transition:all .15s ease;font-family:var(--font-sans);user-select:none}
+        .btn-submit:hover{background:var(--amber-400);transform:translateY(-2px);box-shadow:0 8px 30px rgba(242,95,139,.25)}
+        .btn-submit:active{transform:translateY(1px) scale(.97);box-shadow:0 2px 8px rgba(242,95,139,.15);transition:all .05s ease}
+        .btn-submit svg{width:18px;height:18px}
+        /* Global cursor for clickable elements */
+        a,button,input[type="submit"],select,.check-item label{cursor:pointer}
+        .form-submit-note{font-size:.8rem;color:var(--stone-800);opacity:.6;margin-top:1rem}
+
+        /* PROGRESS */
+        .progress-bar{position:fixed;top:72px;left:0;right:0;height:3px;background:rgba(216,138,203,.15);z-index:99}
+        .progress-fill{height:100%;background:linear-gradient(90deg,var(--amber-500),var(--amber-300));width:0%;transition:width .3s ease}
+
+        /* FOOTER */
+        .form-footer{text-align:center;padding:2rem;font-size:.8rem;color:var(--stone-800);opacity:.5}
+
+        @media(max-width:700px){
+            .form-row,.form-row.triple{grid-template-columns:1fr}
+            .form-section{padding:1.5rem}
+            .form-page{padding:6rem 1rem 3rem}
+            .rating-grid{grid-template-columns:1fr 60px}
+            .avail-grid{grid-template-columns:80px 1fr}
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><img src="pcpc-logo-white.png" alt="PCPC"></a>
+        <a href="index.html" class="nav-back">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+            Back to site
+        </a>
+    </div>
+</nav>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="form-page">
+    <div class="form-header">
+        <h1>Athlete Evaluation Form</h1>
+        <p>Tell us about yourself, your riding, and your goals. This helps us understand where you are so we can figure out the best path forward together.</p>
+        <p class="privacy">All information is kept confidential between athletes and PCPC unless authorized in writing.</p>
+    </div>
+
+    <form id="pcpcForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+        <!-- SECTION 1: BASICS -->
+        <div class="form-section">
+            <div class="form-section-title">The Basics</div>
+            <div class="form-section-desc">Let's start with who you are</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" name="name" required placeholder="First and last name">
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" name="email" required placeholder="you@email.com">
+                </div>
+            </div>
+            <div class="form-row triple">
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" name="dob">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select name="gender">
+                        <option value="">Select</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Non-binary</option>
+                        <option>Prefer not to say</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>USA Cycling Classification <span class="optional">(if any)</span></label>
+                    <input type="text" name="usac_class" placeholder="e.g. Cat 3, Cat 4">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Have you worked with a coach before?</label>
+                    <select name="previous_coach">
+                        <option value="">Select</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>TrainingPeaks email <span class="optional">(if you have one)</span></label>
+                    <input type="email" name="tp_email" placeholder="email linked to TrainingPeaks">
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: PHYSICAL -->
+        <div class="form-section">
+            <div class="form-section-title">Physical Info &amp; Health</div>
+            <div class="form-section-desc">Helps us train safely and effectively</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Height</label>
+                    <input type="text" name="height" placeholder='e.g. 5&apos;10"'>
+                </div>
+                <div class="form-group">
+                    <label>Weight</label>
+                    <input type="text" name="weight" placeholder="e.g. 165 lbs">
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Any recent injuries or illness you're recovering from?</label>
+                    <textarea name="injuries" placeholder="Describe any current injuries, surgeries, or illness"></textarea>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Any diseases, conditions, or family history (stroke, heart attack) that could affect training?</label>
+                    <textarea name="health_history" placeholder="Include asthma, allergies affecting breathing, or anything relevant"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: BACKGROUND -->
+        <div class="form-section">
+            <div class="form-section-title">Background &amp; Experience</div>
+            <div class="form-section-desc">Your history on and off the bike</div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>What type of work do you do and how physically demanding is it?</label>
+                    <textarea name="work_background" placeholder="Desk job, construction, on your feet all day, etc."></textarea>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Background in other sports</label>
+                    <textarea name="sports_background" placeholder="Running, swimming, team sports, etc."></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Years of cycling/racing experience</label>
+                    <input type="text" name="years_experience" placeholder="e.g. 3 years">
+                </div>
+                <div class="form-group">
+                    <label>Equipment for training</label>
+                    <div class="check-group">
+                        <div class="check-item"><input type="checkbox" name="equipment" value="heart_rate" id="hr"><label for="hr">Heart rate monitor</label></div>
+                        <div class="check-item"><input type="checkbox" name="equipment" value="power" id="pm"><label for="pm">Power meter</label></div>
+                        <div class="check-item"><input type="checkbox" name="equipment" value="trainer" id="tr"><label for="tr">Indoor trainer</label></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Type of racing experience &amp; typical race lengths</label>
+                    <textarea name="racing_experience" placeholder="Road, MTB, gravel, cyclocross, crits. Include typical distances."></textarea>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Notable race results <span class="optional">(recent and/or all-time bests)</span></label>
+                    <textarea name="race_results" placeholder="Doesn't need to be every result. Highlights and bests."></textarea>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>How long have you used heart rate or power? Ever been formally tested?</label>
+                    <textarea name="hr_power_history" placeholder="e.g. Power for 2 years, did an FTP test last March"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: TRAINING HABITS -->
+        <div class="form-section">
+            <div class="form-section-title">Training Habits &amp; Availability</div>
+            <div class="form-section-desc">How you currently train and what time you have</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>If you've used a training program, what % of workouts do you typically complete?</label>
+                    <select name="workout_completion">
+                        <option value="">Select</option>
+                        <option>~60%</option>
+                        <option>~80%</option>
+                        <option>~100%</option>
+                        <option>110% (I add more)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>How focused are you on each workout?</label>
+                    <select name="workout_focus">
+                        <option value="">Select</option>
+                        <option>Somewhat focused — I get it done</option>
+                        <option>Very focused — I follow it closely</option>
+                        <option>Extremely detailed — I nail every interval</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Days per week you currently train / are willing to train</label>
+                    <input type="text" name="days_per_week" placeholder="e.g. Currently 4, willing to do 5-6">
+                </div>
+                <div class="form-group">
+                    <label>Are you more focused on numbers or feel?</label>
+                    <select name="numbers_vs_feel">
+                        <option value="">Select</option>
+                        <option>Very numbers-focused</option>
+                        <option>Mix of both</option>
+                        <option>I ride more by feel</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-section-divider"></div>
+            <label style="font-size:.8rem;font-weight:600;color:var(--stone-900);margin-bottom:.75rem;display:block">Hours available per day <span class="optional">(approximate is fine)</span></label>
+            <div class="avail-grid">
+                <div class="avail-day">Monday</div><input class="avail-input" name="avail_mon" placeholder="e.g. 1-2 hrs AM">
+                <div class="avail-day">Tuesday</div><input class="avail-input" name="avail_tue" placeholder="e.g. 1 hr evening">
+                <div class="avail-day">Wednesday</div><input class="avail-input" name="avail_wed" placeholder="e.g. 1.5 hrs">
+                <div class="avail-day">Thursday</div><input class="avail-input" name="avail_thu" placeholder="e.g. 1 hr">
+                <div class="avail-day">Friday</div><input class="avail-input" name="avail_fri" placeholder="e.g. rest day">
+                <div class="avail-day">Saturday</div><input class="avail-input" name="avail_sat" placeholder="e.g. 3-4 hrs">
+                <div class="avail-day">Sunday</div><input class="avail-input" name="avail_sun" placeholder="e.g. 2-3 hrs">
+            </div>
+        </div>
+
+        <!-- SECTION 5: STRENGTH & EQUIPMENT -->
+        <div class="form-section">
+            <div class="form-section-title">Strength, Equipment &amp; Fit</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Do you strength train?</label>
+                    <select name="strength_training">
+                        <option value="">Select</option>
+                        <option>Yes, regularly</option>
+                        <option>Sometimes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Have you had a professional bike fit?</label>
+                    <select name="bike_fit">
+                        <option value="">Select</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>What type of strength training? <span class="optional">(if any)</span></label>
+                    <textarea name="strength_details" placeholder="Gym, bodyweight, yoga, etc."></textarea>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>List your bikes and any fitness equipment at home</label>
+                    <textarea name="bikes_equipment" placeholder="e.g. Canyon Grail gravel bike, Specialized Epic MTB, Wahoo Kickr trainer"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 6: FUELING -->
+        <div class="form-section">
+            <div class="form-section-title">Race Day Fueling</div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Any issues with race day diet / stomach?</label>
+                    <textarea name="diet_issues" placeholder="GI issues, food sensitivities, etc."></textarea>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>What do you currently use for fuel during racing and training?</label>
+                    <textarea name="current_fuel" placeholder="Gels, drink mix, real food, etc."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 7: GOALS -->
+        <div class="form-section">
+            <div class="form-section-title">Goals</div>
+            <div class="form-section-desc">Dream big and be honest about where you are</div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Dream goals — What races do you dream about? How well do you want to do?</label>
+                    <textarea name="dream_goals" rows="3" placeholder="The big ones. No filter."></textarea>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Obtainable goals — What do you think you can realistically achieve right now?</label>
+                    <textarea name="obtainable_goals" rows="3" placeholder="Be honest about where you are today"></textarea>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Race schedule / priority events for the year</label>
+                    <textarea name="race_schedule" rows="3" placeholder="List events, dates, and how important each one is (A, B, C priority)"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 8: SELF ASSESSMENT -->
+        <div class="form-section">
+            <div class="form-section-title">Self Assessment</div>
+            <div class="form-section-desc">Rate yourself 1-10 on each. Add notes if anything stands out.</div>
+            <p class="rating-note">1 = major weakness &nbsp;&middot;&nbsp; 5 = average &nbsp;&middot;&nbsp; 10 = major strength</p>
+            <div class="rating-grid">
+                <div class="rating-label">Sprinting</div><input class="rating-input" name="rate_sprint" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Lactate tolerance</div><input class="rating-input" name="rate_lactate" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Steady power</div><input class="rating-input" name="rate_steady" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Climbing</div><input class="rating-input" name="rate_climbing" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Descending</div><input class="rating-input" name="rate_descending" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Flexibility</div><input class="rating-input" name="rate_flexibility" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Core strength</div><input class="rating-input" name="rate_core" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Endurance</div><input class="rating-input" name="rate_endurance" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Recovery</div><input class="rating-input" name="rate_recovery" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Racing tactics</div><input class="rating-input" name="rate_tactics" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Technical skill</div><input class="rating-input" name="rate_technical" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Pack riding</div><input class="rating-input" name="rate_pack" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Mental skills</div><input class="rating-input" name="rate_mental" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Pain tolerance</div><input class="rating-input" name="rate_pain" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Killer instinct</div><input class="rating-input" name="rate_killer" type="number" min="1" max="10" placeholder="1-10">
+            </div>
+        </div>
+
+        <!-- SECTION 9: PERSONALITY -->
+        <div class="form-section">
+            <div class="form-section-title">The Personal Stuff</div>
+            <div class="form-section-desc">This helps Ronnie coach the whole person, not just the numbers</div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Known weaknesses (think hard on this one)</label>
+                    <textarea name="weaknesses" placeholder="Physical limitations, dietary issues, mental blocks, anything"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Favorite workout</label>
+                    <textarea name="fav_workout" rows="2" placeholder="The session you look forward to"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Least favorite workout</label>
+                    <textarea name="least_fav_workout" rows="2" placeholder="The one you dread"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>What motivates you?</label>
+                    <textarea name="motivators" rows="2" placeholder="Competition, personal bests, community, health..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>What de-motivates you?</label>
+                    <textarea name="demotivators" rows="2" placeholder="Bad weather, plateaus, comparison..."></textarea>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>What do you like to do when you're not riding?</label>
+                    <textarea name="off_bike" rows="2" placeholder="Hobbies, family, work passions..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 10: SERVICE INTEREST -->
+        <div class="form-section">
+            <div class="form-section-title">What are you interested in?</div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Which service(s) are you interested in?</label>
+                    <div class="check-group">
+                        <div class="check-item"><input type="checkbox" name="service_interest" value="1on1" id="s1"><label for="s1">1:1 Coaching ($275/mo)</label></div>
+                        <div class="check-item"><input type="checkbox" name="service_interest" value="plans" id="s2"><label for="s2">Training Plans</label></div>
+                        <div class="check-item"><input type="checkbox" name="service_interest" value="skills" id="s3"><label for="s3">Skill Lessons ($100/hr)</label></div>
+                        <div class="check-item"><input type="checkbox" name="service_interest" value="consult" id="s4"><label for="s4">Free Consultation (just want to chat)</label></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>How did you hear about PCPC?</label>
+                    <input type="text" name="referral_source" placeholder="Word of mouth, Instagram, friend's name, etc.">
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Anything else Ronnie should know?</label>
+                    <textarea name="anything_else" rows="3" placeholder="Whatever's on your mind"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-submit">
+            <button type="submit" class="btn-submit">
+                Submit Evaluation
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+            </button>
+            <p class="form-submit-note">We'll review your info and reach out within 48 hours to schedule your consult.</p>
+        </div>
+    </form>
+</div>
+
+<div class="form-footer">&copy; 2026 Payne Cycling &amp; Performance Coaching</div>
+
+<script>
+// Progress bar based on scroll
+window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+});
+</script>
+
+</body>
+</html>

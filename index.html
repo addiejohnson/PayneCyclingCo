@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCPC // Payne Cycling & Performance Coaching</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+            --stone-950:#120014;
+            --stone-900:#2E294E;
+            --stone-800:#4B4E6D;
+            --stone-700:#3F7CAC;
+            --stone-600:#95C6E8;
+            --stone-500:#2E294E;
+            --stone-400:#f8d7ed;
+            --stone-300:#F25F8B;
+            --stone-200:#D88ACB;
+            --stone-100:#F4F7FB;
+            --stone-50:#FFFFFF;
+            --amber-500:#F25F8B;
+            --amber-400:#fcc2f3;
+            --amber-300:#cae7fc;
+            --emerald-500:#3F7CAC;
+            --font-sans:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+            --font-display:'Hanken Grotesk',sans-serif;
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:var(--font-sans);background:var(--stone-50);color:var(--stone-800);line-height:1.6;-webkit-font-smoothing:antialiased}
+        img{max-width:100%;display:block}
+        a{color:inherit;text-decoration:none}
+
+        /* NAV */
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,0,20,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06)}
+        .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:72px}
+        .nav-logo{display:flex;align-items:center}
+        .nav-logo img{height:40px;width:auto}
+        .nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+        .nav-links a{color:var(--stone-100);font-size:.875rem;font-weight:500;letter-spacing:.03em;transition:color .2s}
+        .nav-links a:hover{color:var(--amber-400)}
+        .nav-cta{background:var(--amber-500);color:var(--stone-950)!important;padding:.6rem 1.4rem;border-radius:6px;font-weight:600!important;font-size:.85rem!important;transition:all .15s ease;cursor:pointer}
+        .nav-cta:hover{background:var(--amber-400);transform:translateY(-1px)}
+        .nav-cta:active{transform:translateY(1px) scale(.96);transition:all .05s ease}
+        .mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
+        .mobile-toggle span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;transition:.3s}
+
+        /* BUTTONS */
+        .btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--amber-500);color:var(--stone-950);padding:1rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;transition:all .15s ease;border:none;cursor:pointer;user-select:none}
+        .btn-primary:hover{background:var(--amber-400);transform:translateY(-2px);box-shadow:0 8px 30px rgba(242,95,139,.25)}
+        .btn-primary:active{transform:translateY(1px) scale(.97);box-shadow:0 2px 8px rgba(242,95,139,.15);transition:all .05s ease}
+        .btn-primary svg{width:18px;height:18px;transition:transform .2s}
+        .btn-primary:hover svg{transform:translateX(3px)}
+        .btn-3{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--stone-100);padding:1rem 2rem;border-radius:8px;font-weight:600;font-size:1rem;border:1px solid var(--stone-700);transition:all .15s ease;cursor:pointer;user-select:none}
+        .btn-3:hover{border-color:var(--stone-500);color:var(--stone-950);background:var(--amber-300)}
+        .btn-3:active{transform:translateY(1px) scale(.97);transition:all .05s ease}
+        
+      
+      
+        .btn-secondary{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--stone-300);padding:1rem 2rem;border-radius:8px;font-weight:600;font-size:1rem;border:1px solid var(--stone-700);transition:all .15s ease;cursor:pointer;user-select:none}
+        .btn-secondary:hover{border-color:var(--stone-500);color:var(--stone-950);background:var(--amber-300)}
+        .btn-secondary:active{transform:translateY(1px) scale(.97);transition:all .05s ease}
+        /* Clickable elements */
+        .nav-links a,.nav-cta,.audience-card,.philosophy-card,.service-card,.testimonial-card,.coach-team-member,.footer-social a{cursor:pointer}
+        a,button,[role="button"]{cursor:pointer}
+
+        /* HERO */
+        .hero{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--stone-950);overflow:hidden}
+        .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(242,95,139,.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(63,124,172,.05) 0%,transparent 50%)}
+        .hero-bg-texture{position:absolute;inset:0;opacity:.5;background-image:url("ronnie-alex.png");background-size:cover;background-position:center}
+        .hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:8rem 2rem 6rem;width:100%}
+        .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(242,95,139,.1);border:1px solid rgba(242,95,139,.2);border-radius:100px;padding:.4rem 1rem;font-size:.8rem;font-weight:600;color:var(--stone-100);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2rem}
+        .hero-badge::before{content:'';width:6px;height:6px;background:var(--amber-400);border-radius:50%}
+        .hero h1{font-family:var(--font-display);font-size:clamp(2.8rem,6vw,5rem);font-weight:700;color:#fff;line-height:1.1;max-width:800px;margin-bottom:1.5rem}
+        .hero h1 em{font-style:italic;color:var(--stone-300)}
+        .hero-sub{font-size:1.15rem;color:var(--stone-100);max-width:560px;line-height:1.7;margin-bottom:3rem}
+        .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:5rem}
+        .hero-stats{display:flex;gap:3rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.08)}
+        .hero-stat-number{font-family:var(--font-display);font-size:2rem;font-weight:700;color:#fff}
+        .hero-stat-label{font-size:.8rem;color:var(--stone-100);text-transform:uppercase;letter-spacing:.08em;margin-top:.25rem}
+
+        /* SECTION COMMON */
+        .section-inner{max-width:1200px;margin:0 auto}
+        .section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--amber-500);margin-bottom:1rem}
+        .section-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);font-weight:700;color:var(--stone-900);line-height:1.15;margin-bottom:1rem}
+        .section-desc{font-size:1.05rem;color:var(--stone-500);max-width:600px;line-height:1.7;margin-bottom:4rem}
+
+        /* AUDIENCE */
+        .audience{padding:7rem 2rem;background:var(--stone-100)}
+        .audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+        .audience-card{position:relative;background:var(--stone-50);border:1px solid var(--stone-200);border-radius:16px;padding:2.5rem;transition:all .3s;overflow:hidden}
+        .audience-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--amber-500),var(--amber-300));opacity:0;transition:opacity .3s}
+        .audience-card:hover{border-color:var(--stone-300);box-shadow:0 8px 40px rgba(0,0,0,.06);transform:translateY(-2px)}
+        .audience-card:active{transform:translateY(0) scale(.99);transition:all .05s ease}
+        .audience-card:hover::before{opacity:1}
+        .audience-icon{width:52px;height:52px;background:var(--stone-900);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem}
+        .audience-icon svg{width:24px;height:24px;color:var(--amber-400)}
+        .audience-card h3{font-size:1.25rem;font-weight:700;color:var(--stone-900);margin-bottom:.75rem}
+        .audience-card p{font-size:.95rem;color:var(--stone-500);line-height:1.7;margin-bottom:1.5rem}
+        .audience-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+        .audience-tag{background:var(--stone-400);color:var(--stone-900);font-size:.75rem;font-weight:600;padding:.35rem .85rem;border-radius:100px}
+
+        /* PHILOSOPHY */
+        .philosophy{padding:7rem 2rem;background:var(--stone-950);color:#fff;position:relative;overflow:hidden}
+        .philosophy::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(242,95,139,.06) 0%,transparent 70%);border-radius:50%}
+        .philosophy .section-title{color:#fff}
+        .philosophy .section-desc{color:var(--stone-100)}
+        .philosophy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;position:relative;z-index:2}
+        .philosophy-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:2rem;transition:all .3s}
+        .philosophy-card:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
+        .philosophy-num{font-family:var(--font-display);font-size:2.5rem;font-weight:700;color:var(--amber-500);opacity:.5;line-height:1;margin-bottom:1rem}
+        .philosophy-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.75rem}
+        .philosophy-card p{font-size:.9rem;color:var(--stone-100);line-height:1.7}
+
+        /* SERVICES */
+        .services{padding:7rem 2rem;background:#F4F7FB}
+        .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+        .service-card{border:1px solid var(--stone-200);border-radius:16px;padding:2.5rem;position:relative;transition:all .3s;background:#fff}
+        .service-card:hover{box-shadow:0 8px 40px rgba(0,0,0,.06);transform:translateY(-2px)}
+        .service-card:active{transform:translateY(0) scale(.99);transition:all .05s ease}
+        .service-card.featured{background:var(--stone-950);border-color:var(--stone-900);color:#fff}
+        .service-popular{position:absolute;top:1.5rem;right:1.5rem;background:var(--amber-500);color:var(--stone-950);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.3rem .8rem;border-radius:100px}
+        .service-price{font-family:var(--font-display);font-size:2.8rem;font-weight:700;margin-bottom:.25rem}
+        .service-price-sub{font-size:.85rem;color:var(--stone-800);margin-bottom:2rem}
+        .service-card.featured .service-price-sub{color:var(--stone-100)}
+        .service-card h3{font-size:1.3rem;font-weight:700;margin-bottom:.5rem}
+        .service-card>p{font-size:.9rem;color:var(--stone-800);margin-bottom:2rem;line-height:1.6}
+        .service-card.featured>p{color:var(--stone-100)}
+        .service-features{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-bottom:2rem}
+        .service-features li{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:var(--stone-800);line-height:1.5}
+        .service-card.featured .service-features li{color:var(--stone-100)}
+        .service-features li svg{width:18px;height:18px;flex-shrink:0;margin-top:2px;color:var(--emerald-500)}
+        .service-card .btn-primary,.service-card .btn-secondary{width:100%;justify-content:center}
+        .service-note{text-align:center;margin-top:1.5rem;font-size:.85rem;color:var(--stone-800)}
+
+        /* TESTIMONIALS */
+        .testimonials{padding:7rem 2rem;background:var(--stone-100)}
+        .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+        .testimonial-card{background:#fff;border-radius:16px;padding:2rem;border:1px solid var(--stone-200);display:flex;flex-direction:column}
+        .testimonial-stars{display:flex;gap:2px;margin-bottom:1.25rem}
+        .testimonial-stars svg{width:16px;height:16px;color:var(--amber-500);fill:var(--amber-500)}
+        .testimonial-text{font-size:.95rem;color:var(--stone-950);line-height:1.7;flex:1;margin-bottom:1.5rem}
+        .testimonial-author{display:flex;align-items:center;gap:.75rem;padding-top:1.25rem;border-top:1px solid var(--stone-100)}
+        .testimonial-avatar{width:40px;height:40px;border-radius:50%;background:var(--stone-900);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:var(--amber-400)}
+        .testimonial-name{font-weight:600;font-size:.9rem;color:var(--stone-800)}
+        .testimonial-role{font-size:.8rem;color:var(--stone-500)}
+
+        /* COACH */
+        .coach{padding:7rem 2rem;background:#fff}
+        .coach-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:center}
+        .coach-image-area{position:relative}
+        .coach-image-placeholder{width:100%;aspect-ratio:4/5;background:var(--stone-900);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--stone-100);font-size:.85rem;gap:.5rem;overflow:hidden}
+        .coach-image-placeholder img{width:100%;height:100%;object-fit:cover}
+        .coach-credentials{position:absolute;bottom:-1rem;left:1.5rem;right:1.5rem;background:#fff;border-radius:12px;padding:1.25rem 1.5rem;box-shadow:0 4px 20px rgba(0,0,0,.1);display:flex;justify-content:space-between}
+        .coach-cred-item{text-align:center}
+        .coach-cred-value{font-weight:700;font-size:1.1rem;color:var(--stone-900)}
+        .coach-cred-label{font-size:.7rem;color:var(--stone-800);text-transform:uppercase;letter-spacing:.08em}
+        .coach-content h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,2.5rem);font-weight:700;color:var(--stone-900);line-height:1.2;margin-bottom:1.5rem}
+        .coach-content h2 em{color:var(--amber-500);font-style:italic}
+        .coach-bio{font-size:1rem;color:var(--stone-800);line-height:1.8;margin-bottom:2rem}
+        .coach-team-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--stone-300);margin-bottom:1rem}
+        .coach-team{display:flex;flex-direction:column;gap:.75rem}
+        .coach-team-member{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:var(--stone-100);border-radius:10px}
+        .team-avatar{width:36px;height:36px;background:var(--stone-900);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--amber-400);font-weight:700;font-size:.75rem}
+        .team-name{font-weight:600;font-size:.9rem;color:var(--stone-800)}
+        .team-specialty{font-size:.8rem;color:var(--stone-500)}
+
+        /* CTA */
+        .cta{padding:7rem 2rem;background:var(--stone-950);text-align:center;position:relative;overflow:hidden}
+        .cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(242,95,139,.08) 0%,transparent 70%)}
+        .cta-inner{position:relative;z-index:2;max-width:700px;margin:0 auto}
+        .cta h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:#fff;margin-bottom:1rem}
+        .cta p{font-size:1.05rem;color:var(--stone-400);margin-bottom:2.5rem;line-height:1.7}
+        .cta .btn-primary{font-size:1.1rem;padding:1.1rem 2.5rem}
+
+        /* FOOTER */
+        .footer{padding:3rem 2rem;background:var(--stone-900);border-top:1px solid rgba(255,255,255,.05)}
+        .footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .footer-left{font-size:.85rem;color:var(--stone-100)}
+        .footer-social{display:flex;gap:1rem}
+        .footer-social a{color:var(--stone-100);transition:color .2s}
+        .footer-social a:hover{color:var(--amber-500)}
+        .footer-social svg{width:20px;height:20px}
+
+        @media(max-width:900px){
+            .audience-grid,.services-grid{grid-template-columns:1fr}
+            .philosophy-grid{grid-template-columns:1fr;gap:1rem}
+            .testimonials-grid{grid-template-columns:1fr}
+            .coach-layout{grid-template-columns:1fr;gap:3rem}
+            .nav-links{display:none}
+            .mobile-toggle{display:block}
+            .footer-inner{flex-direction:column;gap:1.5rem;text-align:center}
+        }
+        @media(max-width:600px){
+            .hero-stats{flex-direction:column;gap:1.5rem}
+            .hero-actions{flex-direction:column}
+            .btn-primary,.btn-secondary{width:100%;justify-content:center}
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo"><img src="pcpc-logo-white.png" alt="PCPC - Payne Cycling & Performance Coaching"></a>
+        <ul class="nav-links">
+            <li><a href="#audience">Who We Coach</a></li>
+            <li><a href="#philosophy">Our Approach</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#coach">Meet Ronnie</a></li>
+            <li><a href="intake.html" class="nav-cta">Get Started</a></li>
+        </ul>
+        <button class="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-bg-texture"></div>
+    <div class="hero-content">
+        <div class="hero-badge">Virginia-Based Cycling Coaching</div>
+        <h1>No shortcuts.<br>Just <em>real</em> fitness.</h1>
+        <p class="hero-sub">Science-backed cycling coaching that builds your aerobic engine from the ground up. We prepare you for the exact terrain, skills, and demands of your next event.</p>
+        <div class="hero-actions">
+            <a href="intake.html" class="btn-primary">Start Your Journey <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg></a>
+            <a href="#services" class="btn-3">View Coaching Plans</a>
+        </div>
+        <div class="hero-stats">
+            <div><div class="hero-stat-number">4</div><div class="hero-stat-label">Expert Coaches</div></div>
+            <div><div class="hero-stat-number">Data-Driven</div><div class="hero-stat-label">Science-Backed Training</div></div>
+            <div><div class="hero-stat-number">Any Discipline</div><div class="hero-stat-label">Road &middot; Gravel &middot; MTB</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="audience" id="audience">
+    <div class="section-inner">
+        <div class="section-label">Who We Coach</div>
+        <h2 class="section-title">Goal-driven riders.<br>Any discipline. Any level.</h2>
+        <p class="section-desc">Racers, NICA kids, lifestyle riders with big goals. If you want structure, accountability, and a coach who'll tell you what you need to hear, you're in the right place.</p>
+        <div class="audience-grid">
+            <div class="audience-card">
+                <div class="audience-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.841m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg></div>
+                <h3>Competitive Racers</h3>
+                <p>Road, gravel, MTB, cyclocross, criterium. You're chasing results and need a coach who builds targeted plans for your specific events, not generic training blocks.</p>
+                <div class="audience-tags">
+                    <span class="audience-tag">Road</span>
+                    <span class="audience-tag">Gravel</span>
+                    <span class="audience-tag">MTB / XC</span>
+                    <span class="audience-tag">Criterium</span>
+                </div>
+            </div>
+            <div class="audience-card">
+                <div class="audience-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg></div>
+                <h3>Goal-Driven Riders</h3>
+                <p>Maybe it's finishing your first century, hitting a power PR, or just riding stronger than last year. You have a goal and want the structure and science to get there.</p>
+                <div class="audience-tags">
+                    <span class="audience-tag">Lifestyle</span>
+                    <span class="audience-tag">Fitness Goals</span>
+                    <span class="audience-tag">First Events</span>
+                    <span class="audience-tag">Level Up</span>
+                </div>
+            </div>
+            <div class="audience-card">
+                <div class="audience-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg></div>
+                <h3>NICA &amp; Junior Racers</h3>
+                <p>Middle and high school athletes competing in NICA throughout Virginia. We build young riders the right way with proper aerobic foundations, real skills, and race-specific prep.</p>
+                <div class="audience-tags">
+                    <span class="audience-tag">NICA Virginia</span>
+                    <span class="audience-tag">MTB Skills</span>
+                    <span class="audience-tag">Youth Development</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="philosophy" id="philosophy">
+    <div class="section-inner">
+        <div class="section-label">Our Approach</div>
+        <h2 class="section-title">The PCPC difference</h2>
+        <p class="section-desc">A lot of coaches patch over weaknesses with intensity. We build the engine first, then sharpen the blade for your specific events.</p>
+        <div class="philosophy-grid">
+            <div class="philosophy-card">
+                <div class="philosophy-num">01</div>
+                <h3>Aerobic Base First</h3>
+                <p>There are no shortcuts to fitness. We prioritize aerobic base building because when events get long, intensity alone won't save you. We build the engine that doesn't quit.</p>
+            </div>
+            <div class="philosophy-card">
+                <div class="philosophy-num">02</div>
+                <h3>Event-Specific Training</h3>
+                <p>Your workouts aren't generic. Racing a criterium? You're drilling sprint technique. MTB race? You're riding the exact terrain with the same features you'll face on race day.</p>
+            </div>
+            <div class="philosophy-card">
+                <div class="philosophy-num">03</div>
+                <h3>Honest Feedback</h3>
+                <p>We don't sugarcoat it. You'll get direct, real feedback about where you are and what needs work, because that's the fastest path to where you want to be.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services" id="services">
+    <div class="section-inner">
+        <div class="section-label">Coaching Plans</div>
+        <h2 class="section-title">Simple pricing. Serious coaching.</h2>
+        <p class="section-desc">Every plan is built around science-backed training tracked via power or heart rate data. Find the level that fits you.</p>
+        <div class="services-grid">
+            <!-- 1:1 COACHING -->
+            <div class="service-card featured">
+                <span class="service-popular">Most Popular</span>
+                <div class="service-price">$275</div>
+                <div class="service-price-sub">per month</div>
+                <h3>1:1 Coaching</h3>
+                <p>Fully personalized training written weekly, adjusted constantly, and built around your life, your events, and your goals.</p>
+                <ul class="service-features">
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Custom weekly plan in TrainingPeaks</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Unlimited adjustments. Life happens, your plan adapts</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Unlimited coach contact (8hr max response)</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Monthly video check-ins</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Race day pacing &amp; event strategy</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Workouts sync to Zwift &amp; Garmin</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Strength training included</li>
+                </ul>
+                <a href="intake.html" class="btn-primary">Get Started</a>
+            </div>
+
+            <!-- TRAINING PLANS -->
+            <div class="service-card">
+                <div class="service-price">Plans</div>
+                <div class="service-price-sub">pricing varies</div>
+                <h3>Training Plans</h3>
+                <p>Structured training plans delivered through TrainingPeaks. Great for self-motivated riders who want science-backed structure without full coaching.</p>
+                <ul class="service-features">
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Pre-built training blocks in TrainingPeaks</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Power or heart rate based</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Limited communication included</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Plan adjustments available at hourly rate</li>
+                </ul>
+                <a href="intake.html" class="btn-secondary">Learn More</a>
+            </div>
+
+            <!-- SKILL LESSONS -->
+            <div class="service-card">
+                <div class="service-price">$100</div>
+                <div class="service-price-sub">per hour</div>
+                <h3>Skill Lessons</h3>
+                <p>Hands-on, in-person skill sessions. Coach travels to you. Perfect for dialing in technical ability on MTB, handling skills, sprint form, or race-specific course prep.</p>
+                <ul class="service-features">
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>1-on-1 in-person coaching</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Coach travels to your location</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>MTB technique, handling, sprints &amp; more</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Race course previews &amp; prep rides</li>
+                </ul>
+                <a href="intake.html" class="btn-secondary">Book a Lesson</a>
+            </div>
+
+            <!-- FREE CONSULT -->
+            <div class="service-card" style="background:linear-gradient(135deg,var(--stone-100),#fff);border-color:var(--amber-500)">
+                <div class="service-price" style="color:var(--amber-500)">Free</div>
+                <div class="service-price-sub">no commitment</div>
+                <h3>Free Consultation</h3>
+                <p>Not sure where to start? Book a free intro call. We'll talk about your goals, your current riding, and figure out the best path forward together.</p>
+                <ul class="service-features">
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Talk through your goals &amp; current fitness</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Get a recommendation on the right plan</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Zero pressure, zero obligation</li>
+                </ul>
+                <a href="intake.html" class="btn-primary">Book Free Consult</a>
+            </div>
+        </div>
+        <p class="service-note">* 1:1 coaching requires TrainingPeaks Premium ($12/mo or annual). Minimum equipment: head unit + heart rate monitor.</p>
+    </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+    <div class="section-inner">
+        <div class="section-label">Athletes Speak</div>
+        <h2 class="section-title">Don't take our word for it</h2>
+        <p class="section-desc">Riders who set goals, put in the work, and grew as athletes.</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <p class="testimonial-text">"I set a goal I wasn't sure was possible. Ronnie built a plan around it, kept me honest, and I crossed that finish line stronger than I've ever been. I didn't just hit the goal, I understood how I got there."</p>
+                <div class="testimonial-author"><div class="testimonial-avatar">AJ</div><div><div class="testimonial-name">Athlete Name</div><div class="testimonial-role">Gravel Racer &middot; PCPC Athlete</div></div></div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <p class="testimonial-text">"I came thinking I needed more intensity. Turns out I needed a real aerobic base. Three months later my endurance was unrecognizable and I wasn't burned out for the first time in years."</p>
+                <div class="testimonial-author"><div class="testimonial-avatar">MR</div><div><div class="testimonial-name">Athlete Name</div><div class="testimonial-role">MTB Racer &middot; PCPC Athlete</div></div></div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <p class="testimonial-text">"My son's first NICA season with PCPC completely changed his confidence on the bike. The coaching was age-appropriate but still serious. He learned real skills and grew so much as an athlete."</p>
+                <div class="testimonial-author"><div class="testimonial-avatar">KL</div><div><div class="testimonial-name">Parent Name</div><div class="testimonial-role">NICA Parent</div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="coach" id="coach">
+    <div class="section-inner">
+        <div class="coach-layout">
+            <div class="coach-image-area">
+                <div class="coach-image-placeholder">
+                    <img src="ronnie-photo.png" alt="Ronnie Payne, head coach at PCPC">
+                </div>
+                <div class="coach-credentials">
+                    <div class="coach-cred-item"><div class="coach-cred-value">MTB</div><div class="coach-cred-label">Racing Background</div></div>
+                    <div class="coach-cred-item"><div class="coach-cred-value">Gravel</div><div class="coach-cred-label">Current Focus</div></div>
+                    <div class="coach-cred-item"><div class="coach-cred-value">Data-Driven</div><div class="coach-cred-label">Science-Backed</div></div>
+                </div>
+            </div>
+            <div class="coach-content">
+                <div class="section-label">Meet Your Coach</div>
+                <h2>Ronnie Payne, the coach who won't <em>sugarcoat</em> it</h2>
+                <p class="coach-bio">Ronnie built his coaching philosophy on the race course. Years of high-level mountain bike racing taught him that there are no shortcuts to real fitness. Now primarily racing gravel, he brings that same no-nonsense, science-driven approach to every athlete he works with. Your training won't just be targeted workouts; it'll be targeted skills, on the exact terrain you'll race, with the specificity that turns preparation into results.</p>
+                <div class="coach-team-label">The PCPC Coaching Team</div>
+                <div class="coach-team">
+                    <div class="coach-team-member"><div class="team-avatar">AB</div><div><div class="team-name">Alexandra Benda</div><div class="team-specialty">Former Marine One pilot &middot; Pro gravel racer &middot; 2nd at Unbound 200 (amateur)</div></div></div>
+                    <div class="coach-team-member"><div class="team-avatar">JP</div><div><div class="team-name">John Petrylak</div><div class="team-specialty">Top-ranked masters XC racer</div></div></div>
+                    <div class="coach-team-member"><div class="team-avatar">ME</div><div><div class="team-name">Matt Edwards</div><div class="team-specialty">UCI MTB racer</div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta" id="contact">
+    <div class="cta-inner">
+        <div class="section-label" style="color:var(--amber-400)">Ready?</div>
+        <h2>Let's build your engine.</h2>
+        <p>Fill out our athlete evaluation form and we'll set up a call to talk about your goals, your events, and how PCPC can get you there.</p>
+        <a href="intake.html" class="btn-primary">Fill Out the Intake Form <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg></a>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-left">&copy; 2026 Payne Cycling &amp; Performance Coaching. All rights reserved.</div>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/payne_performance_coaching/" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="/cdn-cgi/l/email-protection#91e1f2e1f2f5f4e7fed1f6fcf0f8fdbff2fefc" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+        </di
