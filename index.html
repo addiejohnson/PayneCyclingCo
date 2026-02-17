@@ -56,6 +56,8 @@
         .btn-3{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--stone-100);padding:1rem 2rem;border-radius:8px;font-weight:600;font-size:1rem;border:1px solid var(--stone-700);transition:all .15s ease;cursor:pointer;user-select:none}
         .btn-3:hover{border-color:var(--stone-500);color:var(--stone-950);background:var(--amber-300)}
         .btn-3:active{transform:translateY(1px) scale(.97);transition:all .05s ease}
+        .hero .btn-3{border-color:#fff;color:#fff}
+        .hero .btn-3:hover{border-color:var(--stone-500);color:var(--stone-950)}
         
       
       
@@ -69,7 +71,7 @@
         /* HERO */
         .hero{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--stone-950);overflow:hidden}
         .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(242,95,139,.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(63,124,172,.05) 0%,transparent 50%)}
-        .hero-bg-texture{position:absolute;inset:0;opacity:.5;background-image:url("ronnie-alex.png");background-size:cover;background-position:center}
+        .hero-bg-texture{position:absolute;inset:0;opacity:.5;background-image:url("images/PCPC-leading.JPG");background-size:cover;background-position:center}
         .hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:8rem 2rem 6rem;width:100%}
         .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(242,95,139,.1);border:1px solid rgba(242,95,139,.2);border-radius:100px;padding:.4rem 1rem;font-size:.8rem;font-weight:600;color:var(--stone-100);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2rem}
         .hero-badge::before{content:'';width:6px;height:6px;background:var(--amber-400);border-radius:50%}
@@ -184,17 +186,31 @@
         .footer-social a:hover{color:var(--amber-500)}
         .footer-social svg{width:20px;height:20px}
 
-        @media(max-width:900px){
+
+
+             @media(max-width:900px){
             .audience-grid,.services-grid{grid-template-columns:1fr}
             .philosophy-grid{grid-template-columns:1fr;gap:1rem}
             .testimonials-grid{grid-template-columns:1fr}
             .coach-layout{grid-template-columns:1fr;gap:3rem}
-            .nav-links{display:none}
+            .nav-links{display:none;position:fixed;top:72px;left:0;right:0;bottom:0;height:calc(100vh - 72px);background:rgba(18,0,20,.98);flex-direction:column;align-items:center;justify-content:center;gap:0;padding:2rem 0;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:99;overflow-y:auto}
+            .nav-links.open{display:flex}
+            .nav-links li{width:100%;text-align:center}
+            .nav-links a{font-size:1.25rem;color:#fff;display:block;padding:1.1rem 2rem;letter-spacing:.02em}
+            .nav-links a:hover{color:var(--amber-400)}
+            .nav-links li:not(:last-child) a{border-bottom:1px solid rgba(255,255,255,.06)}
+            .nav-links .nav-cta{margin:1.5rem auto 0;display:inline-block!important;width:auto!important}
+            .nav-cta{font-size:1rem!important;padding:.8rem 2rem!important}
             .mobile-toggle{display:block}
+            .mobile-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+            .mobile-toggle.active span:nth-child(2){opacity:0}
+            .mobile-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+            .hero-bg-texture{background-image:url("images/pcpc-mobile-header.jpg");background-position:center}
             .footer-inner{flex-direction:column;gap:1.5rem;text-align:center}
         }
+
         @media(max-width:600px){
-            .hero-stats{flex-direction:column;gap:1.5rem}
+            .hero-stats{display:none}
             .hero-actions{flex-direction:column}
             .btn-primary,.btn-secondary{width:100%;justify-content:center}
         }
@@ -248,7 +264,7 @@
                     <span class="audience-tag">Road</span>
                     <span class="audience-tag">Gravel</span>
                     <span class="audience-tag">MTB / XC</span>
-                    <span class="audience-tag">Criterium</span>
+                    
                 </div>
             </div>
             <div class="audience-card">
@@ -258,7 +274,6 @@
                 <div class="audience-tags">
                     <span class="audience-tag">Lifestyle</span>
                     <span class="audience-tag">Fitness Goals</span>
-                    <span class="audience-tag">First Events</span>
                     <span class="audience-tag">Level Up</span>
                 </div>
             </div>
@@ -267,8 +282,8 @@
                 <h3>NICA &amp; Junior Racers</h3>
                 <p>Middle and high school athletes competing in NICA throughout Virginia. We build young riders the right way with proper aerobic foundations, real skills, and race-specific prep.</p>
                 <div class="audience-tags">
-                    <span class="audience-tag">NICA Virginia</span>
-                    <span class="audience-tag">MTB Skills</span>
+                    <span class="audience-tag">NICA VA</span>
+                    <span class="audience-tag">Skills</span>
                     <span class="audience-tag">Youth Development</span>
                 </div>
             </div>
@@ -328,14 +343,14 @@
 
             <!-- TRAINING PLANS -->
             <div class="service-card">
-                <div class="service-price">Plans</div>
-                <div class="service-price-sub">pricing varies</div>
+                <div class="service-price">$300</div>
+                <div class="service-price-sub">per pre-built 3-month plan</div>
                 <h3>Training Plans</h3>
-                <p>Structured training plans delivered through TrainingPeaks. Great for self-motivated riders who want science-backed structure without full coaching.</p>
+                <p>Structured training plans delivered through TrainingPeaks. Good for self-motivated riders who want science-backed structure without full coaching, but no communication with coach and adjustments can only be made at an hourly rate.</p>
                 <ul class="service-features">
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Pre-built training blocks in TrainingPeaks</li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Power or heart rate based</li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Limited communication included</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>No communication with Coach</li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Plan adjustments available at hourly rate</li>
                 </ul>
                 <a href="intake.html" class="btn-secondary">Learn More</a>
@@ -358,16 +373,16 @@
 
             <!-- FREE CONSULT -->
             <div class="service-card" style="background:linear-gradient(135deg,var(--stone-100),#fff);border-color:var(--amber-500)">
-                <div class="service-price" style="color:var(--amber-500)">Free</div>
-                <div class="service-price-sub">no commitment</div>
-                <h3>Free Consultation</h3>
-                <p>Not sure where to start? Book a free intro call. We'll talk about your goals, your current riding, and figure out the best path forward together.</p>
+                <div class="service-price" style="color:var(--amber-500)">Not sure?</div>
+                
+                <h3>Fill out an intake form</h3>
+                <p>Not sure where to start? Book an intro call after filling in your intake form. We'll talk about your goals, your current riding, and figure out the best path forward together.</p>
                 <ul class="service-features">
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Talk through your goals &amp; current fitness</li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Get a recommendation on the right plan</li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Zero pressure, zero obligation</li>
                 </ul>
-                <a href="intake.html" class="btn-primary">Book Free Consult</a>
+                <a href="intake.html" class="btn-primary">Get started with an Intake form</a>
             </div>
         </div>
         <p class="service-note">* 1:1 coaching requires TrainingPeaks Premium ($12/mo or annual). Minimum equipment: head unit + heart rate monitor.</p>
@@ -404,7 +419,7 @@
         <div class="coach-layout">
             <div class="coach-image-area">
                 <div class="coach-image-placeholder">
-                    <img src="ronnie-photo.png" alt="Ronnie Payne, head coach at PCPC">
+                    <img src="images/ronnie-photo.png" alt="Ronnie Payne, head coach at PCPC">
                 </div>
                 <div class="coach-credentials">
                     <div class="coach-cred-item"><div class="coach-cred-value">MTB</div><div class="coach-cred-label">Racing Background</div></div>
@@ -425,6 +440,17 @@
             </div>
         </div>
     </div>
+<br><br><Br>
+    <div class="coach-content">
+                
+               <center> <h2>We train hard and have fun</h2></center>
+<div class="section-inner">
+<picture>
+    <source media="(max-width:900px)" srcset="images/nica-polaroids.png">
+    <img src="images/team-polaroids.png" alt="PCPC team polaroids">
+</picture>
+
+</div>
 </section>
 
 <section class="cta" id="contact">
@@ -442,4 +468,25 @@
         <div class="footer-social">
             <a href="https://www.instagram.com/payne_performance_coaching/" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
             <a href="/cdn-cgi/l/email-protection#91e1f2e1f2f5f4e7fed1f6fcf0f8fdbff2fefc" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
-        </di
+        </div>
+    </div>
+</footer>
+
+<script>
+    const toggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            toggle.classList.remove('active');
+            navLinks.classList.remove('open');
+        });
+    });
+</script>
+</body>
+</html>
