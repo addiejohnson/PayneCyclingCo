@@ -74,10 +74,11 @@
         .check-item label{font-size:.85rem;color:var(--stone-900);cursor:pointer}
 
         /* RATING GRID */
-        .rating-grid{display:grid;grid-template-columns:1fr auto;gap:.5rem 1rem;align-items:center;margin-top:.5rem}
+        .rating-grid{display:grid;grid-template-columns:1fr 220px;gap:.6rem 1.25rem;align-items:center;margin-top:.5rem}
         .rating-label{font-size:.85rem;color:var(--stone-900)}
-        .rating-input{width:60px;text-align:center;font-size:.85rem;padding:.4rem;border:1px solid rgba(216,138,203,.25);border-radius:6px;background:var(--stone-100);color:var(--stone-900);outline:none}
-        .rating-input:focus{border-color:var(--amber-500);box-shadow:0 0 0 3px rgba(242,95,139,.1)}
+        .rating-control{display:flex;align-items:center;gap:.75rem}
+        .rating-control input[type="range"]{flex:1;accent-color:var(--amber-500);cursor:pointer;height:4px}
+        .rating-val{min-width:20px;font-size:.85rem;font-weight:700;color:var(--amber-500);text-align:right}
         .rating-note{font-size:.75rem;color:var(--stone-800);opacity:.5;margin-bottom:.75rem}
 
         /* AVAILABILITY */
@@ -133,7 +134,9 @@
         <p class="privacy">All information is kept confidential between athletes and PCPC unless authorized in writing.</p>
     </div>
 
-    <form id="pcpcForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form id="pcpcForm" name="athlete-intake" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="athlete-intake">
+        <input type="hidden" name="bot-field" style="display:none">
 
         <!-- SECTION 1: BASICS -->
         <div class="form-section">
@@ -399,21 +402,21 @@
             <div class="form-section-desc">Rate yourself 1-10 on each. Add notes if anything stands out.</div>
             <p class="rating-note">1 = major weakness &nbsp;&middot;&nbsp; 5 = average &nbsp;&middot;&nbsp; 10 = major strength</p>
             <div class="rating-grid">
-                <div class="rating-label">Sprinting</div><input class="rating-input" name="rate_sprint" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Lactate tolerance</div><input class="rating-input" name="rate_lactate" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Steady power</div><input class="rating-input" name="rate_steady" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Climbing</div><input class="rating-input" name="rate_climbing" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Descending</div><input class="rating-input" name="rate_descending" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Flexibility</div><input class="rating-input" name="rate_flexibility" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Core strength</div><input class="rating-input" name="rate_core" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Endurance</div><input class="rating-input" name="rate_endurance" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Recovery</div><input class="rating-input" name="rate_recovery" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Racing tactics</div><input class="rating-input" name="rate_tactics" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Technical skill</div><input class="rating-input" name="rate_technical" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Pack riding</div><input class="rating-input" name="rate_pack" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Mental skills</div><input class="rating-input" name="rate_mental" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Pain tolerance</div><input class="rating-input" name="rate_pain" type="number" min="1" max="10" placeholder="1-10">
-                <div class="rating-label">Killer instinct</div><input class="rating-input" name="rate_killer" type="number" min="1" max="10" placeholder="1-10">
+                <div class="rating-label">Sprinting</div><div class="rating-control"><input type="range" name="rate_sprint" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Lactate tolerance</div><div class="rating-control"><input type="range" name="rate_lactate" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Steady power</div><div class="rating-control"><input type="range" name="rate_steady" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Climbing</div><div class="rating-control"><input type="range" name="rate_climbing" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Descending</div><div class="rating-control"><input type="range" name="rate_descending" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Flexibility</div><div class="rating-control"><input type="range" name="rate_flexibility" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Core strength</div><div class="rating-control"><input type="range" name="rate_core" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Endurance</div><div class="rating-control"><input type="range" name="rate_endurance" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Recovery</div><div class="rating-control"><input type="range" name="rate_recovery" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Racing tactics</div><div class="rating-control"><input type="range" name="rate_tactics" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Technical skill</div><div class="rating-control"><input type="range" name="rate_technical" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Pack riding</div><div class="rating-control"><input type="range" name="rate_pack" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Mental skills</div><div class="rating-control"><input type="range" name="rate_mental" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Pain tolerance</div><div class="rating-control"><input type="range" name="rate_pain" min="1" max="10" value="5"><span class="rating-val">5</span></div>
+                <div class="rating-label">Killer instinct</div><div class="rating-control"><input type="range" name="rate_killer" min="1" max="10" value="5"><span class="rating-val">5</span></div>
             </div>
         </div>
 
@@ -496,6 +499,11 @@
 <div class="form-footer">&copy; 2026 Payne Cycling &amp; Performance Coaching</div>
 
 <script>
+// Rating sliders — live value display
+document.querySelectorAll('.rating-control input[type="range"]').forEach(r => {
+    r.addEventListener('input', () => { r.nextElementSibling.textContent = r.value; });
+});
+
 // Progress bar based on scroll
 window.addEventListener('scroll', () => {
     const h = document.documentElement;
