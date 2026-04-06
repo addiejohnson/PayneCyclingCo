@@ -465,10 +465,11 @@
                 <div class="form-group">
                     <label>Which service(s) are you interested in?</label>
                     <div class="check-group">
-                        <div class="check-item"><input type="checkbox" name="service_interest" value="1on1" id="s1"><label for="s1">1:1 Coaching ($275/mo)</label></div>
-                        <div class="check-item"><input type="checkbox" name="service_interest" value="plans" id="s2"><label for="s2">Training Plans</label></div>
-                        <div class="check-item"><input type="checkbox" name="service_interest" value="skills" id="s3"><label for="s3">Skill Lessons ($100/hr)</label></div>
-                        <div class="check-item"><input type="checkbox" name="service_interest" value="consult" id="s4"><label for="s4">Free Consultation (just want to chat)</label></div>
+                        <div class="check-item"><input type="checkbox" name="service_interest" value="1on1_base" id="s1"><label for="s1">1:1 Base ($225/mo)</label></div>
+                        <div class="check-item"><input type="checkbox" name="service_interest" value="1on1_premium" id="s2"><label for="s2">1:1 Premium ($300/mo)</label></div>
+                        <div class="check-item"><input type="checkbox" name="service_interest" value="plans" id="s3"><label for="s3">Custom Tailored Training Plan ($275)</label></div>
+                        <div class="check-item"><input type="checkbox" name="service_interest" value="skills" id="s4"><label for="s4">Skill Lessons ($100/hr)</label></div>
+                        <div class="check-item"><input type="checkbox" name="service_interest" value="consult" id="s5"><label for="s5">Not sure yet — just want to chat</label></div>
                     </div>
                 </div>
             </div>
@@ -499,6 +500,13 @@
 <div class="form-footer">&copy; 2026 Payne Cycling &amp; Performance Coaching</div>
 
 <script>
+// Pre-check service from URL param (e.g. ?service=skills)
+const serviceParam = new URLSearchParams(window.location.search).get('service');
+if (serviceParam) {
+    const match = document.querySelector(`input[name="service_interest"][value="${serviceParam}"]`);
+    if (match) match.checked = true;
+}
+
 // Rating sliders — live value display
 document.querySelectorAll('.rating-control input[type="range"]').forEach(r => {
     r.addEventListener('input', () => { r.nextElementSibling.textContent = r.value; });

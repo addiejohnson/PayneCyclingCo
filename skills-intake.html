@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Skill Lesson // PCPC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+            --stone-950:#120014;--stone-900:#2E294E;--stone-800:#4B4E6D;--stone-700:#3F7CAC;
+            --stone-600:#95C6E8;--stone-500:#2E294E;--stone-400:#f8d7ed;--stone-300:#F25F8B;
+            --stone-200:#D88ACB;--stone-100:#F4F7FB;--stone-50:#FFFFFF;
+            --amber-500:#F25F8B;--amber-400:#fcc2f3;--amber-300:#cae7fc;
+            --emerald-500:#3F7CAC;
+            --font-sans:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+            --font-display:'Hanken Grotesk',sans-serif;
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:var(--font-sans);background:var(--stone-100);color:var(--stone-800);line-height:1.6;-webkit-font-smoothing:antialiased}
+        a{color:inherit;text-decoration:none}
+
+        /* NAV */
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,0,20,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06)}
+        .nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:72px}
+        .nav-logo{display:flex;align-items:center}
+        .nav-logo img{height:40px;width:auto}
+        .nav-back{color:var(--stone-100);font-size:.875rem;font-weight:500;display:flex;align-items:center;gap:.5rem;transition:all .15s ease;cursor:pointer}
+        .nav-back:hover{color:var(--amber-400);transform:translateX(-2px)}
+        .nav-back:active{transform:translateX(0);transition:all .05s ease}
+        .nav-back svg{width:18px;height:18px}
+
+        /* FORM LAYOUT */
+        .form-page{max-width:800px;margin:0 auto;padding:7rem 2rem 4rem}
+        .form-header{margin-bottom:3rem}
+        .form-header h1{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);font-weight:700;color:var(--stone-900);margin-bottom:.75rem}
+        .form-header p{font-size:1rem;color:var(--stone-800);max-width:600px;line-height:1.7}
+        .form-header .privacy{font-size:.8rem;color:var(--stone-800);opacity:.7;margin-top:.5rem;font-style:italic}
+
+        /* SECTIONS */
+        .form-section{background:#fff;border:1px solid rgba(216,138,203,.15);border-radius:16px;padding:2rem 2.5rem;margin-bottom:1.5rem}
+        .form-section-title{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--stone-900);margin-bottom:.25rem}
+        .form-section-desc{font-size:.85rem;color:var(--stone-800);margin-bottom:1.5rem;opacity:.7}
+        .form-section-divider{height:1px;background:var(--stone-100);margin:1.5rem 0}
+
+        /* FORM ELEMENTS */
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+        .form-row.single{grid-template-columns:1fr}
+        .form-group{display:flex;flex-direction:column;gap:.35rem}
+        .form-group label{font-size:.8rem;font-weight:600;color:var(--stone-900);letter-spacing:.02em}
+        .form-group label .optional{font-weight:400;color:var(--stone-800);opacity:.5}
+        .form-group input,.form-group select,.form-group textarea{
+            font-family:var(--font-sans);font-size:.9rem;padding:.7rem 1rem;
+            border:1px solid rgba(216,138,203,.25);border-radius:8px;
+            background:var(--stone-100);color:var(--stone-900);
+            transition:border-color .2s,box-shadow .2s;outline:none;
+        }
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+            border-color:var(--amber-500);box-shadow:0 0 0 3px rgba(242,95,139,.1)
+        }
+        .form-group textarea{resize:vertical;min-height:80px}
+        .form-group input::placeholder,.form-group textarea::placeholder{color:var(--stone-800);opacity:.4}
+
+        /* CHECKBOX GROUPS */
+        .check-group{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.25rem}
+        .check-item{display:flex;align-items:center;gap:.5rem;cursor:pointer}
+        .check-item input[type="checkbox"]{width:18px;height:18px;accent-color:var(--amber-500);cursor:pointer}
+        .check-item label{font-size:.85rem;color:var(--stone-900);cursor:pointer}
+
+        /* AVAILABILITY */
+        .avail-grid{display:grid;grid-template-columns:100px 1fr;gap:.5rem;align-items:center}
+        .avail-day{font-size:.85rem;font-weight:600;color:var(--stone-900)}
+        .avail-input{font-family:var(--font-sans);font-size:.85rem;padding:.5rem .75rem;border:1px solid rgba(216,138,203,.25);border-radius:6px;background:var(--stone-100);color:var(--stone-900);outline:none}
+        .avail-input:focus{border-color:var(--amber-500);box-shadow:0 0 0 3px rgba(242,95,139,.1)}
+
+        /* SUBMIT */
+        .form-submit{text-align:center;padding:2rem 0}
+        .btn-submit{display:inline-flex;align-items:center;gap:.5rem;background:var(--amber-500);color:var(--stone-950);padding:1.1rem 3rem;border-radius:8px;font-weight:700;font-size:1.05rem;border:none;cursor:pointer;transition:all .15s ease;font-family:var(--font-sans);user-select:none}
+        .btn-submit:hover{background:var(--amber-400);transform:translateY(-2px);box-shadow:0 8px 30px rgba(242,95,139,.25)}
+        .btn-submit:active{transform:translateY(1px) scale(.97);box-shadow:0 2px 8px rgba(242,95,139,.15);transition:all .05s ease}
+        .btn-submit svg{width:18px;height:18px}
+        a,button,input[type="submit"],select,.check-item label{cursor:pointer}
+        .form-submit-note{font-size:.8rem;color:var(--stone-800);opacity:.6;margin-top:1rem}
+
+        /* PROGRESS */
+        .progress-bar{position:fixed;top:72px;left:0;right:0;height:3px;background:rgba(216,138,203,.15);z-index:99}
+        .progress-fill{height:100%;background:linear-gradient(90deg,var(--amber-500),var(--amber-300));width:0%;transition:width .3s ease}
+
+        /* FOOTER */
+        .form-footer{text-align:center;padding:2rem;font-size:.8rem;color:var(--stone-800);opacity:.5}
+
+        @media(max-width:700px){
+            .form-row{grid-template-columns:1fr}
+            .form-section{padding:1.5rem}
+            .form-page{padding:6rem 1rem 3rem}
+            .avail-grid{grid-template-columns:80px 1fr}
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><img src="pcpc-logo-white.png" alt="PCPC"></a>
+        <a href="index.html" class="nav-back">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+            Back to site
+        </a>
+    </div>
+</nav>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="form-page">
+    <div class="form-header">
+        <h1>Book a Skill Lesson</h1>
+        <p>Hands-on, in-person sessions with Ronnie. Tell us who you are, what you want to work on, and when you're available — we'll get something on the calendar.</p>
+        <p class="privacy">$100/hr &middot; Riders come to the coach's location &middot; MTB, handling, sprints, race course prep &amp; more</p>
+    </div>
+
+    <form id="skillsForm" name="skill-lesson-request" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="skill-lesson-request">
+        <input type="hidden" name="bot-field" style="display:none">
+
+        <!-- SECTION 1: CONTACT -->
+        <div class="form-section">
+            <div class="form-section-title">Your Info</div>
+            <div class="form-section-desc">So we know who we're riding with</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" name="name" required placeholder="First and last name">
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" name="email" required placeholder="you@email.com">
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Phone <span class="optional">(optional — fastest way to coordinate)</span></label>
+                    <input type="tel" name="phone" placeholder="e.g. 540-555-0123">
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: SKILLS -->
+        <div class="form-section">
+            <div class="form-section-title">What do you want to work on?</div>
+            <div class="form-section-desc">Check all that apply — or describe it in your own words below</div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <div class="check-group">
+                        <div class="check-item"><input type="checkbox" name="skill_focus" value="mtb_technique" id="sk1"><label for="sk1">MTB technique &amp; handling</label></div>
+                        <div class="check-item"><input type="checkbox" name="skill_focus" value="descending" id="sk2"><label for="sk2">Descending</label></div>
+                        <div class="check-item"><input type="checkbox" name="skill_focus" value="cornering" id="sk3"><label for="sk3">Cornering</label></div>
+                        <div class="check-item"><input type="checkbox" name="skill_focus" value="sprinting" id="sk4"><label for="sk4">Sprint form</label></div>
+                        <div class="check-item"><input type="checkbox" name="skill_focus" value="race_course" id="sk5"><label for="sk5">Race course preview / prep ride</label></div>
+                        <div class="check-item"><input type="checkbox" name="skill_focus" value="climbing" id="sk6"><label for="sk6">Climbing technique</label></div>
+                        <div class="check-item"><input type="checkbox" name="skill_focus" value="other" id="sk7"><label for="sk7">Something else (describe below)</label></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Tell us more <span class="optional">(what you're struggling with, goals for the session, experience level)</span></label>
+                    <textarea name="skill_details" rows="4" placeholder="e.g. I lose speed in tight corners on MTB and want to work on body position and braking points. Intermediate rider, 2 years of trail riding."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: AVAILABILITY -->
+        <div class="form-section">
+            <div class="form-section-title">When are you available?</div>
+            <div class="form-section-desc">Give us your general availability and we'll find a time that works</div>
+            <label style="font-size:.8rem;font-weight:600;color:var(--stone-900);margin-bottom:.75rem;display:block">Best times by day <span class="optional">(leave blank if not available)</span></label>
+            <div class="avail-grid">
+                <div class="avail-day">Monday</div><input class="avail-input" name="avail_mon" placeholder="e.g. morning, after 5pm">
+                <div class="avail-day">Tuesday</div><input class="avail-input" name="avail_tue" placeholder="e.g. evening">
+                <div class="avail-day">Wednesday</div><input class="avail-input" name="avail_wed" placeholder="e.g. anytime">
+                <div class="avail-day">Thursday</div><input class="avail-input" name="avail_thu" placeholder="e.g. after 4pm">
+                <div class="avail-day">Friday</div><input class="avail-input" name="avail_fri" placeholder="e.g. not available">
+                <div class="avail-day">Saturday</div><input class="avail-input" name="avail_sat" placeholder="e.g. all day">
+                <div class="avail-day">Sunday</div><input class="avail-input" name="avail_sun" placeholder="e.g. morning only">
+            </div>
+            <div class="form-section-divider"></div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Any specific dates that work well, or dates to avoid?</label>
+                    <input type="text" name="date_notes" placeholder="e.g. anytime after April 15th, not the weekend of May 3rd">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-submit">
+            <button type="submit" class="btn-submit">
+                Request a Lesson
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+            </button>
+            <p class="form-submit-note">We'll reach out within 48 hours to confirm a time.</p>
+        </div>
+    </form>
+</div>
+
+<div class="form-footer">&copy; 2026 Payne Cycling &amp; Performance Coaching</div>
+
+<script>
+// Progress bar based on scroll
+window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+});
+</script>
+
+</body>
+</html>

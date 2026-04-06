@@ -118,9 +118,7 @@
 
         /* SERVICES */
         .services{padding:7rem 2rem;background:#F4F7FB}
-        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
-        .services-grid-bottom{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;max-width:900px;margin:0 auto;width:100%}
-        .services-junior-note{text-align:center;font-style:italic;font-size:.88rem;color:var(--stone-500);margin:2.5rem 0}
+        .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
         .service-card{border:1px solid var(--stone-200);border-radius:16px;padding:2.5rem;position:relative;transition:all .3s;background:#fff}
         .service-card:hover{box-shadow:0 8px 40px rgba(0,0,0,.06);transform:translateY(-2px)}
         .service-card:active{transform:translateY(0) scale(.99);transition:all .05s ease}
@@ -191,7 +189,7 @@
 
 
              @media(max-width:900px){
-            .audience-grid,.services-grid,.services-grid-bottom{grid-template-columns:1fr}
+            .audience-grid,.services-grid{grid-template-columns:1fr}
             .philosophy-grid{grid-template-columns:1fr;gap:1rem}
             .testimonials-grid{grid-template-columns:1fr}
             .coach-layout{grid-template-columns:1fr;gap:3rem}
@@ -323,43 +321,23 @@
         <div class="section-label">Coaching Plans</div>
         <h2 class="section-title">Simple pricing. Serious coaching.</h2>
         <p class="section-desc">Every plan is built around science-backed training tracked via power or heart rate data. Find the level that fits you.</p>
-        <!-- TOP ROW: 3 coaching cards -->
         <div class="services-grid">
-            <!-- 1:1 BASE -->
-            <div class="service-card">
-                <div class="service-price">$225</div>
-                <div class="service-price-sub">per month</div>
-                <h3>1:1 Base</h3>
-                <p>Personalized weekly coaching at an accessible price. A solid training structure that fits around your life, with the guidance you need to keep moving forward.</p>
-                <ul class="service-features">
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Custom weekly plan in TrainingPeaks</li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Weekly adjustments as life happens</li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Coach contact via email (24hr max response)</li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Monthly email review</li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Race day pacing &amp; event strategy</li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Workouts sync to Zwift &amp; Garmin</li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Strength training included</li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>TrainingPeaks Premium required (athlete's own subscription)</li>
-                </ul>
-                <a href="intake.html" class="btn-secondary">Get Started</a>
-            </div>
-
-            <!-- 1:1 PREMIUM -->
+            <!-- 1:1 COACHING -->
             <div class="service-card featured">
                 <span class="service-popular">Most Popular</span>
-                <div class="service-price">$300</div>
+                <div class="service-price">$275</div>
                 <div class="service-price-sub">per month</div>
-                <h3>1:1 Premium</h3>
+                <h3>1:1 Coaching</h3>
                 <p>Fully personalized training written weekly, adjusted constantly, and built around your life, your events, and your goals.</p>
                 <ul class="service-features">
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Custom weekly plan in TrainingPeaks</li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Unlimited adjustments. Life happens, your plan adapts</li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Unlimited coach contact via email (12hr max response)</li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Monthly video check-in</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Monthly video check-ins</li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Race day pacing &amp; event strategy</li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Workouts sync to Zwift &amp; Garmin</li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Strength training included</li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>TrainingPeaks Premium included, covered by your coach</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>TrainingPeaks Premium included — covered by your coach</li>
                 </ul>
                 <a href="intake.html" class="btn-primary">Get Started</a>
             </div>
@@ -379,13 +357,7 @@
                 </ul>
                 <a href="intake.html" class="btn-secondary">Learn More</a>
             </div>
-        </div>
 
-        <!-- JUNIOR / COLLEGIATE NOTE -->
-        <p class="services-junior-note">Junior and collegiate athletes: cost shouldn't be a barrier to good coaching. <a href="intake.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Reach out</a> about our subsidized program.</p>
-
-        <!-- BOTTOM ROW: Skill Lessons + Intake -->
-        <div class="services-grid-bottom">
             <!-- SKILL LESSONS -->
             <div class="service-card">
                 <div class="service-price">$100</div>
@@ -398,13 +370,13 @@
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>MTB technique, handling, sprints &amp; more</li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Race course previews &amp; prep rides</li>
                 </ul>
-                <a href="skills-intake.html" class="btn-secondary">Book a Lesson</a>
+                <a href="intake.html" class="btn-secondary">Book a Lesson</a>
             </div>
 
             <!-- FREE CONSULT -->
             <div class="service-card" style="background:linear-gradient(135deg,var(--stone-100),#fff);border-color:var(--amber-500)">
                 <div class="service-price" style="color:var(--amber-500)">Not sure?</div>
-
+                
                 <h3>Fill out an intake form</h3>
                 <p>Not sure where to start? Book an intro call after filling in your intake form. We'll talk about your goals, your current riding, and figure out the best path forward together.</p>
                 <ul class="service-features">
